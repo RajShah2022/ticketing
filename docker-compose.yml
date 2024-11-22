@@ -1,0 +1,25 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres-container-ticketing
+    image: postgres
+    environment:
+      POSTGRES_USER: ticketing
+      POSTGRES_PASSWORD: ticketing
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: ticketing
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      - spring-demo
+    restart: unless-stopped
+
+networks:
+  spring-demo:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
